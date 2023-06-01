@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="Main Fragment"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.englishwordxml2.screens.MainFragment"
+        android:label="Главный экран"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dictionaryFragment"
+        android:name="com.example.englishwordxml2.screens.DictionaryFragment"
+        android:label="Словарь"
+        tools:layout="@layout/fragment_dictionary">
+        <action
+            android:id="@+id/action_dictionaryFragment_to_letterFragment"
+            app:destination="@id/letterFragment" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/letterFragment"
+        android:name="com.example.englishwordxml2.screens.LetterFragment"
+        android:label="Буква"
+        tools:layout="@layout/fragment_letter">
+        <action
+            android:id="@+id/action_letterFragment_to_addLetterFragment"
+            app:destination="@id/addLetterFragment" />
+        <action
+            android:id="@+id/action_letterFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment" />
+        <argument
+            android:name="letter"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLetterFragment"
+        android:name="com.example.englishwordxml2.screens.AddLetterFragment"
+        android:label="Добавить букву"
+        tools:layout="@layout/fragment_add_letter">
+        <action
+            android:id="@+id/action_addLetterFragment_to_letterFragment"
+            app:destination="@id/letterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.example.englishwordxml2.screens.ExerciseFragment"
+        android:label="Упражнения"
+        tools:layout="@layout/fragment_exercise">
+        <action
+            android:id="@+id/action_exerciseFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>
