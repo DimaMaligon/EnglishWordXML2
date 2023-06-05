@@ -25,6 +25,9 @@ class MainFragment : Fragment() {
         binding.buttonDictionary.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_dictionaryFragment)
         }
+        binding.buttonExercise.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_exerciseFragment)
+        }
     }
 
     companion object {

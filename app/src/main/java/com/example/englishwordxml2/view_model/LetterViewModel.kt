@@ -1,5 +1,6 @@
 package com.example.englishwordxml2.view_model
 
+import android.text.Editable
 import androidx.lifecycle.ViewModel
 import com.example.englishwordxml2.db.MyDbManager
 import dagger.hilt.android.lifecycle.HiltViewModel
