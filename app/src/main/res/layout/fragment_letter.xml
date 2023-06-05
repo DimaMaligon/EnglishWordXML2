@@ -27,17 +27,17 @@
         android:background="@drawable/shape_search"
         app:layout_constraintEnd_toEndOf="@+id/title_letter"
         app:layout_constraintStart_toStartOf="@+id/title_letter"
-        app:layout_constraintTop_toBottomOf="@+id/title_letter" />
+        app:layout_constraintTop_toBottomOf="@+id/title_letter" >
 
-    <TextView
-        android:id="@+id/list_words"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    </SearchView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_words"
+        android:layout_width="291dp"
+        android:layout_height="282dp"
         android:layout_marginTop="28dp"
-        android:text="Список"
-        app:layout_constraintEnd_toEndOf="@+id/search_letter"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/search_letter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_letter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.englishwordxml2.view_model
 
 import android.text.Editable
 import androidx.lifecycle.ViewModel
+import com.example.englishwordxml2.data.EnglishWord
 import com.example.englishwordxml2.db.MyDbManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,9 +18,9 @@ class LetterViewModel @Inject constructor(val myDbManager: MyDbManager) : ViewMo
     val englishWord: StateFlow<String> = englishWordMutable
     private val englishTranscriptionMutable = MutableStateFlow("")
     val englishTranscription: StateFlow<String> = englishTranscriptionMutable
-    private val englishListMutable: MutableStateFlow<MutableList<String>> =
+    private val englishListMutable: MutableStateFlow<MutableList<EnglishWord>> =
         MutableStateFlow(mutableListOf())
-    val englishList: StateFlow<List<String>> = englishListMutable
+    var englishList: StateFlow<List<EnglishWord>> = englishListMutable
     private val tapMutable = MutableStateFlow(false)
     val tap: StateFlow<Boolean> = tapMutable
     private val translateWordMutable = MutableStateFlow("")
@@ -46,7 +47,7 @@ class LetterViewModel @Inject constructor(val myDbManager: MyDbManager) : ViewMo
     fun getEnglishList() {
         englishListMutable.value = myDbManager.readWordsTable(letter.value)
     }
-    fun setEnglishList(list : List<String>) {
+    fun setEnglishList(list : List<EnglishWord>) {
         englishListMutable.value = list.toMutableList()
     }
 

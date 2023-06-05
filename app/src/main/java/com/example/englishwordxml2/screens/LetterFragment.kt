@@ -15,7 +15,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.englishwordxml2.R
+import com.example.englishwordxml2.adapter.WordAdapter
+import com.example.englishwordxml2.data.EnglishWord
 import com.example.englishwordxml2.databinding.FragmentLetterBinding
 import com.example.englishwordxml2.view_model.LetterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,8 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class LetterFragment : Fragment() {
     private lateinit var binding: FragmentLetterBinding
     private val args: LetterFragmentArgs by navArgs()
-    private var list = listOf<String>()
     private val letterModel: LetterViewModel by activityViewModels()
+    private val adapter = WordAdapter(this)
+    private lateinit var listEnglishWords: ArrayList<EnglishWord>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +46,12 @@ class LetterFragment : Fragment() {
         val letter = args.letter
         letterModel.setLetter(letter)
         binding.titleLetter.text = "Буква $letter"
-        getListWords()
 
+        letterModel.apply {
+            getEnglishList()
+            listEnglishWords = englishList.value as ArrayList<EnglishWord>
+        }
+        setListRecycler(listEnglishWords)
         searchWord()
     }
 
@@ -67,45 +75,42 @@ class LetterFragment : Fragment() {
         }, viewLifecycleOwner)
     }
 
-    fun searchWord(){
+    fun searchWord() {
         binding.searchLetter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val q = query
-                letterModel.apply {
-                        getEnglishTranslateWord(searchWord.value)
-                        binding.listWords.text = translateWord.value
-                }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText?.isEmpty() == true){
-                    getListWords()
+                if (newText != null) {
+                    val listWords = filterList(newText)
+                    setListRecycler(listWords as ArrayList<EnglishWord>)
                 }
-                letterModel.apply {
-                        newText?.let { setSearchWord(it) }
-                        getEnglishTranslateWord(searchWord.value)
-                        binding.listWords.text = translateWord.value
+                if (newText?.isEmpty() == true){
+                    setListRecycler(listEnglishWords)
                 }
-                Log.d("querynewText","111 $newText")
                 return false
             }
         })
     }
 
-    fun  getListWords(){
-        letterModel.apply {
-            getEnglishList()
-            list = englishList.value
-        }
-
+    fun setListRecycler(listEnglishWords: ArrayList<EnglishWord>) {
         binding.apply {
-            var textWord = ""
-            for (word in list) {
-                textWord += "$word \n"
-            }
-            listWords.text = textWord
+            recyclerWords.layoutManager = LinearLayoutManager(activity)
+            recyclerWords.adapter = adapter
+            adapter.setLessonList(listEnglishWords)
         }
+    }
+
+    fun filterList(query: String): MutableList<EnglishWord> {
+        val newListWords = mutableListOf<EnglishWord>()
+        for (item in listEnglishWords) {
+            if (item.word.lowercase().contains(query)) {
+                newListWords.add(item)
+                return newListWords
+            }
+        }
+        return listEnglishWords
     }
 
     companion object {

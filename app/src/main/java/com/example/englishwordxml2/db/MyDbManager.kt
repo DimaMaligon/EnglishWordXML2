@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import com.example.englishwordxml2.data.EnglishWord
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,8 +49,8 @@ class MyDbManager @Inject constructor(application: Application) {
     }
 
     @SuppressLint("Range")
-    fun readWordsTable(letter: String?): ArrayList<String> {
-        val dataList = ArrayList<String>()
+    fun readWordsTable(letter: String?): ArrayList<EnglishWord> {
+        val dataList = ArrayList<EnglishWord>()
 
         val cursor = db?.query(
             MyDataBase.TABLE_NAME_WORDS,   // The table to query
@@ -64,7 +65,7 @@ class MyDbManager @Inject constructor(application: Application) {
             while (this?.moveToNext() == true) {
                 val dataWord = getString(getColumnIndex(MyDataBase.WORDS_OF_LETTER))
                 val dataTranslate = getString(getColumnIndex(MyDataBase.TRANSLATE_OF_WORD))
-                dataList.add("$dataWord - $dataTranslate")
+                dataList.add(EnglishWord(dataWord, dataTranslate, false))
             }
         }
         cursor?.close()
@@ -116,9 +117,5 @@ class MyDbManager @Inject constructor(application: Application) {
         }
         cursor?.close()
         return wordTranslate
-    }
-
-    fun closeDb() {
-        myDbHelper.close()
     }
 }
