@@ -31,13 +31,13 @@ class AddLetterFragment : Fragment() {
                 letterModel.setEnglishWord(this.addEngWord.text.toString())
                 letterModel.setEnglishTranscription(this.addTranslateWord.text.toString())
                 letterModel.setTap(true)
+                letterModel.checkTap(letterModel.tap.value)
                 letterModel.setTap(false)
             }
         }
     }
 
     companion object {
-
         fun newInstance() =
             AddLetterFragment()
     }

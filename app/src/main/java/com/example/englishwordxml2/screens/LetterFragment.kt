@@ -1,7 +1,6 @@
 package com.example.englishwordxml2.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.englishwordxml2.R
 import com.example.englishwordxml2.adapter.WordAdapter
 import com.example.englishwordxml2.data.EnglishWord
@@ -75,7 +74,7 @@ class LetterFragment : Fragment() {
         }, viewLifecycleOwner)
     }
 
-    fun searchWord() {
+    private fun searchWord() {
         binding.searchLetter.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -86,7 +85,7 @@ class LetterFragment : Fragment() {
                     val listWords = filterList(newText)
                     setListRecycler(listWords as ArrayList<EnglishWord>)
                 }
-                if (newText?.isEmpty() == true){
+                if (newText?.isEmpty() == true) {
                     setListRecycler(listEnglishWords)
                 }
                 return false
@@ -94,15 +93,16 @@ class LetterFragment : Fragment() {
         })
     }
 
-    fun setListRecycler(listEnglishWords: ArrayList<EnglishWord>) {
+    private fun setListRecycler(listEnglishWords: ArrayList<EnglishWord>) {
         binding.apply {
-            recyclerWords.layoutManager = LinearLayoutManager(activity)
+            val linerManager = GridLayoutManager(activity, 1)
+            recyclerWords.layoutManager = linerManager
             recyclerWords.adapter = adapter
             adapter.setLessonList(listEnglishWords)
         }
     }
 
-    fun filterList(query: String): MutableList<EnglishWord> {
+    private fun filterList(query: String): MutableList<EnglishWord> {
         val newListWords = mutableListOf<EnglishWord>()
         for (item in listEnglishWords) {
             if (item.word.lowercase().contains(query)) {

@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 class MyDbManager @Inject constructor(application: Application) {
-    val myDbHelper = DbHelper(application)
-    var db: SQLiteDatabase? = null
+    private val myDbHelper = DbHelper(application)
+    private var db: SQLiteDatabase? = null
 
     fun openDb() {
         db = myDbHelper.writableDatabase
@@ -27,7 +27,7 @@ class MyDbManager @Inject constructor(application: Application) {
     }
 
     @SuppressLint("Range")
-    fun checkWordsTable(): Boolean{
+    fun checkWordsTable(): Boolean {
         var dataNull = false
 
         val cursor = db?.query(
@@ -41,7 +41,7 @@ class MyDbManager @Inject constructor(application: Application) {
         )
 
         val countRow = cursor?.count
-        if(countRow == null || countRow < 4){
+        if (countRow == null || countRow < 4) {
             dataNull = true
         }
         cursor?.close()
@@ -94,28 +94,5 @@ class MyDbManager @Inject constructor(application: Application) {
         }
         cursor?.close()
         return dataMap
-    }
-
-    @SuppressLint("Range")
-    fun searchWordTable(word: String): String {
-        var wordTranslate = ""
-
-        val cursor = db?.query(
-            MyDataBase.TABLE_NAME_WORDS,   // The table to query
-            null,             // The array of columns to return (pass null to get all)
-            "words = '$word'",   // The columns for the WHERE clause
-            null,          // The values for the WHERE clause
-            null,                   // don't group the rows
-            null,                   // don't filter by row groups
-            null           // The sort order
-        )
-        with(cursor) {
-            while (this?.moveToNext() == true) {
-                val dataTranslate = getString(getColumnIndex(MyDataBase.TRANSLATE_OF_WORD))
-                wordTranslate = dataTranslate
-            }
-        }
-        cursor?.close()
-        return wordTranslate
     }
 }

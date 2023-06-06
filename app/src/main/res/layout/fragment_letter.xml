@@ -8,12 +8,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title_letter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
-        android:text="Буква"
+        android:text="@string/words_letter"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,17 +24,21 @@
         android:layout_width="153dp"
         android:layout_height="53dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape_search"
+        android:background="?attr/colorSecondaryContainer"
+        app:elevation="40dp"
         app:layout_constraintEnd_toEndOf="@+id/title_letter"
         app:layout_constraintStart_toStartOf="@+id/title_letter"
-        app:layout_constraintTop_toBottomOf="@+id/title_letter" >
-
+        app:layout_constraintTop_toBottomOf="@+id/title_letter"
+        app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+        >
     </SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_words"
-        android:layout_width="291dp"
-        android:layout_height="282dp"
+        android:layout_width="245dp"
+        android:layout_height="183dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
