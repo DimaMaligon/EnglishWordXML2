@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">EnglishWordXML2</string>
-    <string name="hello_blank_fragment">hello</string>
+    <string name="word">Word</string>
+    <string name="english_word_add">Введите слово на английском:</string>
+    <string name="translate_word">Ввведите перевод на русском:</string>
+    <string name="add_button">Добавить</string>
+    <string name="counters">Счетчики</string>
+    <string name="guess_counter">Угадал</string>
+    <string name="counter_no_guess">Не Угадал</string>
+    <string name="digital_counter">0</string>
+    <string name="answer_button">Answer</string>
+    <string name="words_letter">Слова на букву</string>
+    <string name="dictionary">Словарь</string>
+    <string name="exercise">Упражнения</string>
+    <string name="letter">Letter</string>
 </resources>

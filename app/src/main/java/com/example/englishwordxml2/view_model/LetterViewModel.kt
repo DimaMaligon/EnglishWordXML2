@@ -1,6 +1,5 @@
 package com.example.englishwordxml2.view_model
 
-import android.text.Editable
 import androidx.lifecycle.ViewModel
 import com.example.englishwordxml2.data.EnglishWord
 import com.example.englishwordxml2.db.MyDbManager
@@ -23,10 +22,6 @@ class LetterViewModel @Inject constructor(val myDbManager: MyDbManager) : ViewMo
     var englishList: StateFlow<List<EnglishWord>> = englishListMutable
     private val tapMutable = MutableStateFlow(false)
     val tap: StateFlow<Boolean> = tapMutable
-    private val translateWordMutable = MutableStateFlow("")
-    val translateWord: StateFlow<String> = translateWordMutable
-    private val searchWordMutable = MutableStateFlow("")
-    val searchWord: StateFlow<String> = searchWordMutable
 
     fun setLetter(letter: String?) {
         letterMutable.value = letter.toString()
@@ -40,22 +35,15 @@ class LetterViewModel @Inject constructor(val myDbManager: MyDbManager) : ViewMo
         englishTranscriptionMutable.value = word
     }
 
-    fun setSearchWord(word: String) {
-        searchWordMutable.value = word
-    }
-
     fun getEnglishList() {
         englishListMutable.value = myDbManager.readWordsTable(letter.value)
     }
-    fun setEnglishList(list : List<EnglishWord>) {
-        englishListMutable.value = list.toMutableList()
+
+    fun setTap(boolean: Boolean) {
+        tapMutable.value = boolean
     }
 
-    fun getEnglishTranslateWord(word: String) {
-        translateWordMutable.value = myDbManager.searchWordTable(word = word)
-    }
-
-    fun setTap(tap: Boolean) {
+    fun checkTap(tap: Boolean) {
         when (tap) {
             true -> {
                 letter.let {

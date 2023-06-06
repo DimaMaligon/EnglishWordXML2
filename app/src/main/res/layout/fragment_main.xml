@@ -6,25 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".screens.MainFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_dictionary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Словарь"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/dictionary"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="1.0"
+        app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_exercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Упражнения"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/exercise"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -45,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="240dp" />
+        app:layout_constraintGuide_begin="214dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -53,5 +57,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="240dp" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/top_banner"
+        android:layout_width="226dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/words"
+        app:layout_constraintBottom_toTopOf="@+id/button_dictionary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="33dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

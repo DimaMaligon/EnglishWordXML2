@@ -7,5 +7,5 @@
         android:id="@+id/word_description"
         android:layout_width="216dp"
         android:layout_height="29dp"
-        android:text="TextView" />
+        android:text="@string/word" />
 </androidx.cardview.widget.CardView>

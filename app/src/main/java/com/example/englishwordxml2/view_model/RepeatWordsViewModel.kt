@@ -11,7 +11,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RepeatWordsViewModel @Inject constructor(val myDbManager: MyDbManager) : ViewModel() {
 
-
     private val guessCountMutable = MutableStateFlow(0)
     val guessCount: StateFlow<Int> = guessCountMutable
     private val noGuessCountMutable = MutableStateFlow(0)
@@ -22,15 +21,9 @@ class RepeatWordsViewModel @Inject constructor(val myDbManager: MyDbManager) : V
     private val translateWordsListMutable: MutableStateFlow<MutableList<EnglishWord>> =
         MutableStateFlow(mutableListOf())
     val translateWordsList: MutableStateFlow<MutableList<EnglishWord>> = translateWordsListMutable
-    private val showDialogMutable = MutableStateFlow(false)
-    val showDialog: StateFlow<Boolean> = showDialogMutable
 
     fun getEnglishWordsMap() {
-        if (myDbManager.checkWordsTable()) {
-            onOpenDialogClicked()
-        } else {
-            englishWordsMapMutable.value = myDbManager.readRandomWordsTable()
-        }
+        englishWordsMapMutable.value = myDbManager.readRandomWordsTable()
     }
 
     fun updateTranslateList() {
@@ -54,11 +47,11 @@ class RepeatWordsViewModel @Inject constructor(val myDbManager: MyDbManager) : V
     }
 
 
-    fun guessWord(word: String): Boolean {
+    fun guessWord(translate: String): Boolean {
         translateWordsListMutable.value
             .let {
                 it.forEach { element ->
-                    if (element.word == word) {
+                    if (element.translate == translate) {
                         return element.rightTranslate
                     }
                 }
@@ -71,17 +64,5 @@ class RepeatWordsViewModel @Inject constructor(val myDbManager: MyDbManager) : V
             true -> guessCountMutable.value++
             false -> noGuessCountMutable.value++
         }
-    }
-
-    fun onOpenDialogClicked() {
-        showDialogMutable.value = true
-    }
-
-    fun onDialogConfirm() {
-        showDialogMutable.value = false
-    }
-
-    fun onDialogDismiss() {
-        showDialogMutable.value = false
     }
 }
